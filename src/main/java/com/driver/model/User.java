@@ -12,26 +12,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    List<Reservation> reservationList;
+
     private String name;
-
     private String phoneNumber;
-
     private String password;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Reservation> reservationList = new ArrayList<>();
-
-    public User() {
-
-    }
-
-    public User(int id, String name, String phoneNumber, String password, List<Reservation> reservationList) {
-        this.id = id;
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        this.reservationList = reservationList;
-    }
 
     public int getId() {
         return id;
@@ -39,6 +25,14 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public List<Reservation> getReservationList() {
+        return reservationList;
+    }
+
+    public void setReservationList(List<Reservation> reservationList) {
+        this.reservationList = reservationList;
     }
 
     public String getName() {
@@ -63,13 +57,5 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public List<Reservation> getReservationList() {
-        return reservationList;
-    }
-
-    public void setReservationList(List<Reservation> reservationList) {
-        this.reservationList = reservationList;
     }
 }

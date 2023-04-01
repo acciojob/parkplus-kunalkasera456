@@ -6,6 +6,8 @@ import com.driver.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -32,8 +34,9 @@ public class UserServiceImpl implements UserService {
 
         User user = new User();
         user.setName(name);
-        user.setPassword(password);
         user.setPhoneNumber(phoneNumber);
+        user.setPassword(password);
+        user.setReservationList(new ArrayList<>());
         userRepository4.save(user);
     }
 }

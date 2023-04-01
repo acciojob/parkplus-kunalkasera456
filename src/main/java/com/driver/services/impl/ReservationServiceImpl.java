@@ -76,15 +76,17 @@ public class ReservationServiceImpl implements ReservationService {
         }
 
         optimalSpot.setOccupied(true);
-
         reservation.setUser(user);
-        reservation.setNumberOfHours(timeInHours);
         reservation.setSpot(optimalSpot);
-
-        user.getReservationList().add(reservation);
-
+        reservation.setNumberOfHours(timeInHours);
+        List<Reservation> reservations = user.getReservationList();
+        List<Reservation> reservationList = optimalSpot.getReservationList();
+        reservationList.add(reservation);
+        reservations.add(reservation);
+        user.setReservationList(reservationList);
+        optimalSpot.setReservationList(reservationList);
         userRepository3.save(user);
-
+        spotRepository3.save(optimalSpot);
         return reservation;
 
     }
